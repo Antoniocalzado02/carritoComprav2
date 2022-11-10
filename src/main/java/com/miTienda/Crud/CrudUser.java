@@ -52,6 +52,7 @@ public class CrudUser {
 		}
 		return resultado;
 	}
+	
 	public boolean deleteUser(User s) {
 		boolean resultado=false;
 		try {

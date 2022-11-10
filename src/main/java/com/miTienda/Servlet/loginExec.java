@@ -53,8 +53,7 @@ public class loginExec extends HttpServlet {
 			response.getWriter().append("<html><head></head><body><script><h1>Ya estas logueado</h1> <h1>"+name+"</h1></script></body></html>");
 		}
 
-		response.getWriter().append("<html><head></head><body><script><h1>Ya estas logueado</h1> <h1>"+name+"</h1></script></body></html>");
-
+		response.sendRedirect(redirect);
 	}
 
 	public static String MD5(String cadena) {

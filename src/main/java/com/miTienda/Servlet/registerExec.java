@@ -51,10 +51,10 @@ public class registerExec extends HttpServlet {
 		String genero=request.getParameter("Genero");
 		
 		CrudUser c=new CrudUser();
-		User s=new User(nickname,nombre,apellidos,email,contrasena,fecha_nac,genero);
-	//	c.addUser(s);
+		User s=new User(nickname,nombre,apellidos,email,MD5(contrasena),fecha_nac,genero);
+		c.addUser(s);
 		
-		response.getWriter().append("<html><head></head><body><script><h1>Ya estas logueado</h1> <h1>\"+name+\"</h1></script></body></html>");
+		response.sendRedirect("login.jsp");
 		
 		
 	}
