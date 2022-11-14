@@ -1,8 +1,6 @@
 package com.miTienda.Crud;
 
-
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,28 +12,27 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import com.miTienda.Articles.Articles;
 import com.miTienda.User.User;
 
-
-
-public class CrudUser {
+public class CrudArticles {
 	
-	public CrudUser() {
+	
+	public CrudArticles() {
 		super();
 	}
 	
-	public static User readUser(String username) {
+	public static Articles readUser(String username) {
 		Session session = connection.getSession();
-		User u=null;
-		
+		Articles u=null;
 		try {
-			u= (User) session.get(User.class,username);
+			u= (Articles) session.get(Articles.class,username);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		return u;
 	}
-	public boolean addUser(User s) {
+	public boolean addUser(Articles s) {
 		boolean resultado=false;
 		Session session = connection.getSession();
 		try {
@@ -50,11 +47,11 @@ public class CrudUser {
 		return resultado;
 	}
 	
-	public boolean deleteUser(User s) {
+	public boolean deleteUser(Articles s) {
 		boolean resultado=false;
 		Session session = connection.getSession();
 		try {
-			User sNew= (User) session.get(User.class,s.getNickname());
+			Articles sNew= (Articles) session.get(Articles.class,s.getId());
 			session.getTransaction().begin();
 			session.delete(sNew);	
 			session.getTransaction().commit();
@@ -88,13 +85,13 @@ public class CrudUser {
 		return resultado;
 	}
 	
-	public static List<User> loadList(){
+	public static List<Articles> loadList(){
 		Session session = connection.getSession();
-		List<User> list= new ArrayList<>();
-		Query query=session.createQuery("SELECT u FROM USUARIO u");
+		List<Articles> list= new ArrayList<>();
+		Query query=session.createQuery("SELECT u FROM ARTICLES u");
 		list= query.getResultList();
 		return list;
 		
 	}
-	
+
 }

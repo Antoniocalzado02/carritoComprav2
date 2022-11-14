@@ -23,6 +23,9 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
+--Crear la base de datos
+	CREATE database tiendaOnlineCalzado;
+
 --
 -- Estructura de tabla para la tabla `ARTICLES`
 --
