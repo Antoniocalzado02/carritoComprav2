@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+
 import com.miTienda.Articles.Articles;
 import com.miTienda.Categoria.Categoria;
 import com.miTienda.Crud.CrudArticles;
@@ -40,7 +42,25 @@ public class loginExec extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		PrintWriter out=response.getWriter();
+		out.println("<!DOCTYPE html>\n"
+				+ "<html lang=\"en\">\n"
+				+ "<head>\n"
+				+ "    <meta charset=\"UTF-8\">\n"
+				+ "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n"
+				+ "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
+				+ "    <title>Document</title>\n"
+				+ "</head>\n"
+				+ "<body>\n"
+				+ "    <form id=form method=post action=loginExec>\n"
+				+ "        <input type=submit value=submit>\n"
+				+ "    </form>\n"
+				+ "    \n"
+				+ "</body>\n"
+				+ "</html>\n"
+				+ "");
+
+		
 	}
 
 	/**
@@ -57,12 +77,14 @@ public class loginExec extends HttpServlet {
 		String redirect="error.jsp";
 		if (u != null && (u.getContrasena().equals(MD5(password)))) {
 			response.getWriter().append("<html><head></head><body><h1>Ya estas logueado</h1> <h1>"+name+"</h1></body></html>");
-			response.getWriter().print("Estas logueado");
+			
 			
 			PrintWriter out=response.getWriter();
 			
 			List<Articles> listaArticulos= CrudArticles.loadList();
-
+			if(u.isEs_admin()==true) {
+				response.getWriter().append("<a href=addArticulo.jsp>Annadir articulo</a>");
+			}
 			out.println("  <!DOCTYPE html>\n"
 					+ "<html lang=\"en\">\n"
 					+ "<head>\n"
@@ -76,6 +98,9 @@ public class loginExec extends HttpServlet {
 			out.println(
 					"<table border='1' class=\"tabla\">\n"
 					+ "	<tr>\n"
+					+ "		<td>\n"
+					+ "			Id_Articulo\n"
+					+ "		</td>\n"
 					+ "		<td>\n"
 					+ "			Nombre\n"
 					+ "		</td>\n"
@@ -91,6 +116,9 @@ public class loginExec extends HttpServlet {
 					+ "	</tr>\n");
 			for(Articles a:listaArticulos) {
 				out.print("<tr>\n"
+						+"<td>\n"
+						+a.getId()+"\n"
+						+"</td>\n"
 						+"<td>\n"
 						+a.getNombre()+"\n"
 						+"</td>\n"

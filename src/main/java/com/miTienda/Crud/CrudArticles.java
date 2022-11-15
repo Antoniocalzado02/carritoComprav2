@@ -32,7 +32,7 @@ public class CrudArticles {
 		}
 		return u;
 	}
-	public boolean addUser(Articles s) {
+	public static boolean addArticle(Articles s) {
 		boolean resultado=false;
 		Session session = connection.getSession();
 		try {

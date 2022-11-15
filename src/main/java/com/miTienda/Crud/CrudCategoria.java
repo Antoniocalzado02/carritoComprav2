@@ -23,17 +23,17 @@ public class CrudCategoria {
 	
 	}
 	
-	public static Categoria readUser(String username) {
+	public static Categoria readCategoria(int id) {
 		Session session = connection.getSession();
 		Categoria u=null;
 		try {
-			u= (Categoria) session.get(Categoria.class,username);
+			u= (Categoria) session.get(Categoria.class,id);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		return u;
 	}
-	public boolean addUser(Categoria s) {
+	public static boolean addCategoria(Categoria s) {
 		boolean resultado=false;
 		Session session = connection.getSession();
 		try {
@@ -48,7 +48,7 @@ public class CrudCategoria {
 		return resultado;
 	}
 	
-	public boolean deleteUser(Categoria s) {
+	public static boolean deleteCategoria(Categoria s) {
 		boolean resultado=false;
 		Session session = connection.getSession();
 		try {

@@ -1,0 +1,56 @@
+package com.miTienda.Servlet;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.catalina.ha.backend.Sender;
+
+import com.miTienda.Articles.Articles;
+import com.miTienda.Categoria.Categoria;
+import com.miTienda.Crud.CrudArticles;
+import com.miTienda.Crud.CrudCategoria;
+
+/**
+ * Servlet implementation class addArticulo
+ */
+@WebServlet("/addArticulo")
+public class addArticulo extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public addArticulo() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String name=request.getParameter("name");
+		String description=request.getParameter("description");
+		Double price=Double.parseDouble(request.getParameter("price"));
+		Categoria c=CrudCategoria.readCategoria(Integer.parseInt(request.getParameter("categorie")));
+		Articles a= new Articles(name, description, price, c);
+		
+		CrudArticles.addArticle(a);
+		response.sendRedirect("loginExec");
+	}
+
+}
