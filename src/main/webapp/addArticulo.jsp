@@ -10,9 +10,22 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%
+String bienvenido="";
+HttpSession sesion=request.getSession();
+String isSesion = (String) sesion.getAttribute("login");
+String userSesion= (String) sesion.getAttribute("usuario");
+if(isSesion != null && userSesion!=null && isSesion.equals("True")){
+	bienvenido=("Sesion: "+userSesion);
+}
+else{
+%> <jsp:forward page="error.jsp"></jsp:forward> <%
+} %>
 
 <div class="annadir">
+	<p><%= bienvenido %></p>
 	<form action="addArticulo" method="post">
+		
 		<p>Name: </p>
 		<input type="text" id="name" name="name">
 		<p>Description: </p>

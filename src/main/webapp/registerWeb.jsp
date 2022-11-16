@@ -11,35 +11,35 @@
     <form id="form" method="post" action="registerExec">
         <div class="form-field">
             <label for="nickname">Nickname</label>
-            <input type="text" id="nickname" name="nickname" >
+            <input type="text" id="nickname" name="nickname" required>
             <small></small>
 
         </div><br>
         <div class="form-field">
             <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" name="nombre" >
+            <input type="text" id="nombre" name="nombre" required minlength="1" maxlength="20">
             <small></small>
 
         </div><br>
         <div class="form-field">
             <label for="apellidos">Apellidos</label>
-            <input type="text" id="apellidos" name="apellidos" >
+            <input type="text" id="apellidos" name="apellidos" required >
             <small></small>
 
         </div><br>
         <div class="form-field">
             <label for="gmail">Email</label>
-            <input type="email" id="gmail" name="gmail" >
+            <input type="email" id="gmail" name="gmail" required>
             <small></small>
         </div><br>
         <div class="form-field">
             <label for="password">Contraseña</label>
-            <input type="password" id="password" name="password" >
+            <input type="password" id="password" name="password" required>
             <small></small>
         </div><br>
         <div class="form-field">
             <label for="fecha_nac">Fecha_nac</label>
-            <input type="date" id="fecha_nac" name="fecha_nac" >
+            <input type="date" id="fecha_nac" name="fecha_nac" required>
             <small></small>
         </div><br>
         <div class="form-field">

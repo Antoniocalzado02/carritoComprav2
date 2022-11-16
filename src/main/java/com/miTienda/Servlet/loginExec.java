@@ -12,8 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-
+import javax.servlet.http.HttpSession;
 
 import com.miTienda.Articles.Articles;
 import com.miTienda.Categoria.Categoria;
@@ -42,24 +41,7 @@ public class loginExec extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		PrintWriter out=response.getWriter();
-		out.println("<!DOCTYPE html>\n"
-				+ "<html lang=\"en\">\n"
-				+ "<head>\n"
-				+ "    <meta charset=\"UTF-8\">\n"
-				+ "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n"
-				+ "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
-				+ "    <title>Document</title>\n"
-				+ "</head>\n"
-				+ "<body>\n"
-				+ "    <form id=form method=post action=loginExec>\n"
-				+ "        <input type=submit value=submit>\n"
-				+ "    </form>\n"
-				+ "    \n"
-				+ "</body>\n"
-				+ "</html>\n"
-				+ "");
-
+		doPost(request, response);
 		
 	}
 
@@ -69,18 +51,40 @@ public class loginExec extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		HttpSession session=request.getSession();
+		
 
-		String name = request.getParameter("nombre");
-		String password = request.getParameter("password");
+		String name = (String)session.getAttribute("usuario");
+		
+		
+		
 		CrudUser uc = new CrudUser();
 		User u = uc.readUser(name);
+		
+		String password = (String)session.getAttribute("password");
+		
+		
+		
 		String redirect="error.jsp";
-		if (u != null && (u.getContrasena().equals(MD5(password)))) {
-			response.getWriter().append("<html><head></head><body><h1>Ya estas logueado</h1> <h1>"+name+"</h1></body></html>");
+		
+		if (u==null) {
+			name = request.getParameter("nombre");
+			password = request.getParameter("password");
 			
+			u=CrudUser.readUser(name);
+			
+			session.setAttribute("login", "True");
+			session.setAttribute("usuario", name);
+			session.setAttribute("password", password);
+		}
+		
+		
+		
+		if (u != null && (u.getContrasena().equals(MD5(password)))) {			
 			
 			PrintWriter out=response.getWriter();
-			
+			response.getWriter().append("<a href=cerrarSesion.jsp>Cerrar sesion</a>");
 			List<Articles> listaArticulos= CrudArticles.loadList();
 			if(u.isEs_admin()==true) {
 				response.getWriter().append("<a href=addArticulo.jsp>Annadir articulo</a>");
