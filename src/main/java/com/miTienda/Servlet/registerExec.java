@@ -51,11 +51,31 @@ public class registerExec extends HttpServlet {
 		String genero=request.getParameter("Genero");
 		
 		CrudUser c=new CrudUser();
-		User s=new User(nickname,nombre,apellidos,email,MD5(contrasena),fecha_nac,genero);
-		c.addUser(s);
 		
-		response.sendRedirect("login.jsp");
+		boolean error=false;
+		int msgError=0;
 		
+		if(nickname!=null && contrasena!=null && email!=null && nombre!=null && apellidos!=null && fecha_nac!=null && genero!=null && !nickname.isEmpty() && !contrasena.isEmpty() && !email.isEmpty() && !nombre.isEmpty() && !apellidos.isEmpty() &&  !genero.isEmpty()) {
+			if(CrudUser.readUser(nickname)!=null) {
+				error=true;
+				msgError=2;
+			}
+			else {
+				User u=new User(nickname,nombre,apellidos,email,MD5(contrasena),fecha_nac,genero);
+				c.addUser(u);
+			}
+		}
+		else {
+			error=true;
+			msgError=4;
+			
+		}
+		if(error) {
+			response.sendRedirect("error.jsp?msg="+msgError);
+		}
+		else {
+			response.sendRedirect("login.jsp");
+		}
 		
 	}
 	
@@ -69,9 +89,9 @@ public class registerExec extends HttpServlet {
 			byte[] byteArray = md5.digest();
 
 			BigInteger bigInt = new BigInteger(1, byteArray);
-			// El parámetro 16 significa hexadecimal
+			
 			String result = bigInt.toString(16);
-			// Relleno de ceros de orden superior de menos de 32 bits
+			
 			while (result.length() < 32) {
 				result = "0" + result;
 			}

@@ -1,6 +1,8 @@
 package com.miTienda.Servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,10 +49,29 @@ public class addArticulo extends HttpServlet {
 		String description=request.getParameter("description");
 		Double price=Double.parseDouble(request.getParameter("price"));
 		Categoria c=CrudCategoria.readCategoria(Integer.parseInt(request.getParameter("categorie")));
-		Articles a= new Articles(name, description, price, c);
 		
-		CrudArticles.addArticle(a);
-		response.sendRedirect("loginExec");
+		
+		
+		
+		PrintWriter out=response.getWriter();
+		Boolean error=false;
+		int msgError=0;
+		
+		
+		if(name==null || name.isEmpty() || description==null || description.isEmpty() || price==null) {
+			error=true;
+			msgError=5;
+		}
+		
+		if(error) {
+			response.sendRedirect("error.jsp?msg="+msgError);
+		}
+		else {
+			Articles a= new Articles(name, description, price, c);
+			CrudArticles.addArticle(a);
+			response.sendRedirect("loginExec");
+			
+		}
 	}
 
 }

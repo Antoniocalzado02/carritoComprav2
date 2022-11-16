@@ -27,11 +27,11 @@ else{
 	<form action="addArticulo" method="post">
 		
 		<p>Name: </p>
-		<input type="text" id="name" name="name">
+		<input type="text" id="name" name="name" required>
 		<p>Description: </p>
-		<input type="text" id="description" name="description">
+		<input type="text" id="description" name="description" required>
 		<p>Price: </p>
-		<input type="number" step="0.01" id="price" name="price">
+		<input type="number" step="0.01" id="price" name="price" required>
 		<p>Categorie: </p>
 		<select id="categorie" name="categorie">
 		<%List<Categoria> lista=CrudCategoria.loadList();  

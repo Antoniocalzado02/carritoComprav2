@@ -52,36 +52,43 @@ public class loginExec extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		HttpSession session=request.getSession();
+				String name = request.getParameter("nombre");
+				String password = request.getParameter("password");
+				
+				
+				HttpSession sesion=request.getSession();
+				
+				
+				Boolean error=false;
+				int msgError=0;
+				User u = null;
+				
+				if (name==null || password==null || name.isEmpty() || password.isEmpty()) { 
+					name = (String) sesion.getAttribute("usuario");
+					password = (String) sesion.getAttribute("password");
+					if (name==null || password==null) { 
+						error=true;
+						msgError=4;
+					}
+					else { 
+						u=CrudUser.readUser(name);
+					}
+				}
+				else {
+					u=CrudUser.readUser(name);
+					if (u==null || (!u.getContrasena().equals(MD5(password)))) { 
+						error=true;
+						msgError=1;
+					}
+					else { 
+						sesion.setAttribute("login", "True");
+						sesion.setAttribute("usuario", name);
+						sesion.setAttribute("password", password);
+						
+					}
+				}
 		
-
-		String name = (String)session.getAttribute("usuario");
-		
-		
-		
-		CrudUser uc = new CrudUser();
-		User u = uc.readUser(name);
-		
-		String password = (String)session.getAttribute("password");
-		
-		
-		
-		String redirect="error.jsp";
-		
-		if (u==null) {
-			name = request.getParameter("nombre");
-			password = request.getParameter("password");
-			
-			u=CrudUser.readUser(name);
-			
-			session.setAttribute("login", "True");
-			session.setAttribute("usuario", name);
-			session.setAttribute("password", password);
-		}
-		
-		
-		
-		if (u != null && (u.getContrasena().equals(MD5(password)))) {			
+		if (!error) {			
 			
 			PrintWriter out=response.getWriter();
 			response.getWriter().append("<a href=cerrarSesion.jsp>Cerrar sesion</a>");
@@ -96,6 +103,7 @@ public class loginExec extends HttpServlet {
 					+ "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n"
 					+ "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
 					+ "    <title>Document</title>\n"
+					+ "    <link href=\"style.css\" rel=\"stylesheet\"></link>"
 					+ "</head>\n"
 					+ "<body>\n"
 					+ "<p>Bienvenido "+ name + "</p>");
@@ -146,7 +154,7 @@ public class loginExec extends HttpServlet {
 					+ "</html>  ");
 		}
 		else {
-			response.sendRedirect(redirect);
+			response.sendRedirect("error.jsp");
 		}
 
 	}
@@ -161,9 +169,9 @@ public class loginExec extends HttpServlet {
 			byte[] byteArray = md5.digest();
 
 			BigInteger bigInt = new BigInteger(1, byteArray);
-			// El parámetro 16 significa hexadecimal
+			
 			String result = bigInt.toString(16);
-			// Relleno de ceros de orden superior de menos de 32 bits
+			
 			while (result.length() < 32) {
 				result = "0" + result;
 			}
@@ -173,5 +181,7 @@ public class loginExec extends HttpServlet {
 		}
 		return null;
 	}
+	
+	
 
 }

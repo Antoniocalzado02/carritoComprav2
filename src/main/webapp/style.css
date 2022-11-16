@@ -1,0 +1,16 @@
+@charset "ISO-8859-1";
+
+.cabecera{
+	background-color: gray;
+	text-align: center;
+	padding-bottom:5%;
+	text-decoration: overline;
+	border-style: solid; color: black;
+}
+.container{
+	background-color: aquamarine;
+	text-align: center;
+	padding: 15%;
+	table-layout: auto;
+	border-style: solid; color: black;
+}
