@@ -26,24 +26,28 @@ public class Articles {
 	private String descripcion;
 	@Column(name="price")
 	private Double precio;
+	@Column(name="quantity")
+	private int quantity;
 	@ManyToOne
 	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
 	
 	
-	public Articles(String nombre, String descripcion, Double precio, Categoria categoria) {
+	public Articles(String nombre, String descripcion, Double precio,int quantity,Categoria categoria) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.precio = precio;
+		this.quantity=quantity;
 		this.categoria = categoria;
 	}
-	public Articles(int id, String nombre, String descripcion, Double precio, Categoria categoria) {
+	public Articles(int id, String nombre, String descripcion, Double precio,int quantity ,Categoria categoria) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.precio = precio;
+		this.quantity=quantity;
 		this.categoria = categoria;
 	}
 	public Articles() {
@@ -79,6 +83,13 @@ public class Articles {
 	public void setPrecio(Double precio) {
 		this.precio = precio;
 	}
+	public int getQuantity() {
+		return quantity;
+	}
+	
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 	public Categoria getCategoria() {
 		return categoria;
 	}
@@ -100,7 +111,7 @@ public class Articles {
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio=" + precio
-				+ ", categoria=" + categoria + "]";
+				+ ", categoria=" + categoria + ", quantity=" + quantity +"]";
 	}
 	
 

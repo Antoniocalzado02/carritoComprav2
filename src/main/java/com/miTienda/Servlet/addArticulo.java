@@ -48,6 +48,7 @@ public class addArticulo extends HttpServlet {
 		String name=request.getParameter("name");
 		String description=request.getParameter("description");
 		Double price=Double.parseDouble(request.getParameter("price"));
+		int quantity=Integer.parseInt(request.getParameter("quantity"));
 		Categoria c=CrudCategoria.readCategoria(Integer.parseInt(request.getParameter("categorie")));
 		
 		
@@ -67,7 +68,7 @@ public class addArticulo extends HttpServlet {
 			response.sendRedirect("error.jsp?msg="+msgError);
 		}
 		else {
-			Articles a= new Articles(name, description, price, c);
+			Articles a= new Articles(name, description, price,quantity, c);
 			CrudArticles.addArticle(a);
 			response.sendRedirect("loginExec");
 			

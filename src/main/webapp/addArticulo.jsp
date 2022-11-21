@@ -32,6 +32,8 @@ else{
 		<input type="text" id="description" name="description" required>
 		<p>Price: </p>
 		<input type="number" step="0.01" id="price" name="price" required>
+		<p>Quantity: </p>
+		<input type="number" step="form-control number" id="quantity" name="quantity" required>
 		<p>Categorie: </p>
 		<select id="categorie" name="categorie">
 		<%List<Categoria> lista=CrudCategoria.loadList();  
