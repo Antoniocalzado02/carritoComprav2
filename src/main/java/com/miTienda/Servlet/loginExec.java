@@ -55,6 +55,7 @@ public class loginExec extends HttpServlet {
 				String name = request.getParameter("nombre");
 				String password = request.getParameter("password");
 				
+				int contador=0;
 				
 				HttpSession sesion=request.getSession();
 				
@@ -92,6 +93,7 @@ public class loginExec extends HttpServlet {
 			
 			PrintWriter out=response.getWriter();
 			response.getWriter().append("<a href=cerrarSesion.jsp>Cerrar sesion</a>");
+			response.getWriter().append("<br>");
 			List<Articles> listaArticulos= CrudArticles.loadList();
 			if(u.isEs_admin()==true) {
 				response.getWriter().append("<a href=addArticulo.jsp>Annadir articulo</a>");
@@ -108,45 +110,29 @@ public class loginExec extends HttpServlet {
 					+ "<body>\n"
 					+ "<p>Bienvenido "+ name + "</p>");
 			out.println(
-					"<table border='1' class=\"tabla\">\n"
-					+ "	<tr>\n"
-					+ "		<td>\n"
-					+ "			Id_Articulo\n"
-					+ "		</td>\n"
-					+ "		<td>\n"
-					+ "			Nombre\n"
-					+ "		</td>\n"
-					+ "		<td>\n"
-					+ "			Descripcion\n"
-					+ "		</td>\n"
-					+ "		<td>\n"
-					+ "			Precio\n"
-					+ "		</td>\n"
-					+ "		<td>\n"
-					+ "			Categoria\n"
-					+ "		</td>	\n"
-					+ "	</tr>\n");
+					"<table border='1' class=\"tabla\">\n");
 			for(Articles a:listaArticulos) {
-				out.print("<tr>\n"
-						+"<td>\n"
-						+a.getId()+"\n"
-						+"</td>\n"
-						+"<td>\n"
-						+a.getNombre()+"\n"
-						+"</td>\n"
-						+"<td>\n"
-						+a.getDescripcion()+"\n"
-						+"</td>\n"
-						+"<td>\n"
-						+a.getPrecio()+"\n"
-						+"</td>\n"
-						+"<td>\n"
-						+a.getCategoria().getNombre()+"\n"
-						+"</td>\n"
-						+"</tr>\n"
+				out.print("<div class='container'>\n"
+							+"<div class='class'>\n"
+								
+								+"<p>Name:  "+a.getNombre()+"</p>"+"<br>"
+								
+								+"<p>Description:  "+a.getDescripcion()+"</p>"+"<br>"
+								
+								+"<p>Price:  "+a.getPrecio()+"$</p>"+"<br>"
+								
+								+"<p>Categorie:  "+a.getCategoria().getNombre()+"</p>"+"<br>"
+								
+								+"<p>Quantity:  "+a.getQuantity()+"</p>"+"<br>"
+								
+								+"<input type='submit' value='Comprar'>"
+								
+							+"</div>\n"
+						+"</div>\n"
 						);
 				
 			}
+			contador+=1;
 					
 					out.println("\n"
 					+ "</table>"

@@ -13,5 +13,6 @@
   <mapping class="com.miTienda.User.User"/>
   <mapping class="com.miTienda.Articles.Articles"/>
   <mapping class="com.miTienda.Categoria.Categoria"/>
+  <mapping class="com.miTienda.UsuarioArticles.UsuarioArticles"/>
  </session-factory>
 </hibernate-configuration>
