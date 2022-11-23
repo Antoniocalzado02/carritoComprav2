@@ -1,5 +1,6 @@
 package com.miTienda.CarritoCompra;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -9,7 +10,7 @@ public class itemCarrito {
 	private int id_article;
 	private int quantity;
 	private double price;
-	private Date fecha;
+	private LocalDate fecha;
 	
 	
 	
@@ -20,7 +21,7 @@ public class itemCarrito {
 		this.id_article = id_article;
 		this.quantity = quantity;
 		this.price = price;
-		this.fecha = fecha;
+		this.fecha = LocalDate.now();
 	}
 	
 	
@@ -49,10 +50,10 @@ public class itemCarrito {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	public Date getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
-	public void setFecha(Date fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 

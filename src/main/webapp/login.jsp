@@ -10,24 +10,29 @@
 <body>
 	<%session.invalidate(); %>
 	<header class="cabecera">
-	<div class=titulo><h1>Construcciones ACS</h1></div>
+	<div class="titulo" align="center"><h1>Construcciones ACS</h1></div>
+	<div class="titulo" align="center"><img src="imagenes/logo2.jpg" width="100px"></div>
 	</header>
     <div class="container">
 		 <form id="form" method="post" action="loginExec" border="3px">
 		     <div class="form-field">
-		     <label for="nombre">Nickname</label>
-		     <input type="text" id="nombre" name="nombre" required>
-		            
-		
+			     <label for="nombre">Nickname</label>
+			     <input type="text" id="nombre" name="nombre" required>
+			            
+			
+			     <br>
+			     <br>
+			     
+			     <label for="password">Password</label>
+			     <input type="password" id="password" name="password" required>
+			     <br>
+			     <br>
+			     <button class="btn" type="submit">Entrar</button><br><br><br>
+				<br>
+			            
 		     </div><br>
-		     <div class="form-field">
-		     <label for="password">Password</label>
-		     <input type="password" id="password" name="password" required>
-		            
-		     </div><br>
-		     <button class="btn" type="submit">Entrar</button><br><br><br>
 		 </form>
-			<a href="registerWeb.jsp"><button class="btn">Registrate aqui</button></a>
+				<a href="registerWeb.jsp"><button class="btn">Registrate aqui</button></a>
     
     </div>
 

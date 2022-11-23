@@ -7,10 +7,32 @@
 	text-decoration: overline;
 	border-style: solid; color: black;
 }
+
 .container{
 	background-color: aquamarine;
 	text-align: center;
+	padding: 13%;
+	table-layout: auto;
+	border-style: solid; color: black;
+}
+
+.hijo{
+	background-color: aquamarine;
+	text-align: center;
 	padding: 15%;
+	table-layout: auto;
+	border-style: solid; color: black;
+}
+
+.padre{
+	display: grid;
+  	grid-template-columns: repeat(3, 1fr);
+  	grid-gap: 5px;
+}
+
+.form-field{
+	text-align: center;
+	padding: 13%;
 	table-layout: auto;
 	border-style: solid; color: black;
 }

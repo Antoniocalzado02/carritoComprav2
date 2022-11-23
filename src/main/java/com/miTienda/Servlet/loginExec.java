@@ -92,12 +92,8 @@ public class loginExec extends HttpServlet {
 		if (!error) {			
 			
 			PrintWriter out=response.getWriter();
-			response.getWriter().append("<a href=cerrarSesion.jsp>Cerrar sesion</a>");
-			response.getWriter().append("<br>");
 			List<Articles> listaArticulos= CrudArticles.loadList();
-			if(u.isEs_admin()==true) {
-				response.getWriter().append("<a href=addArticulo.jsp>Annadir articulo</a>");
-			}
+			
 			out.println("  <!DOCTYPE html>\n"
 					+ "<html lang=\"en\">\n"
 					+ "<head>\n"
@@ -108,14 +104,25 @@ public class loginExec extends HttpServlet {
 					+ "    <link href=\"style.css\" rel=\"stylesheet\"></link>"
 					+ "</head>\n"
 					+ "<body>\n"
-					+ "<p>Bienvenido "+ name + "</p>");
+					+ "<header class=\"cabecera\">"
+					+ "<p align=\"center\">Bienvenido "+ name + "</p>"
+					+ "<img src=\"imagenes/logo.png\" class=\"logo\" width=\"50px\" align=\"center\">\n"
+					+ "<br>"
+					+ "<br>"
+					+ "<a href=cerrarSesion.jsp align=\"center\"><button class=\"btn\">Cerrar Sesion</button></a>"
+					+ "<img src=\"imagenes/carrito.png\" class=\"carrito\" width=\"50px\" align=\"right\">\n");
+					if(u.isEs_admin()==true) {
+						response.getWriter().append("<a href=addArticulo.jsp align=\"center\"><button class=\"btn\">Add Articulo</button></a>");
+					}
+					out.println("</header>");
 			out.println(
-					"<table border='1' class=\"tabla\">\n");
+					"<table border='1' class=\"tabla\">\n"
+					+"<div class=\"padre\">");
 			for(Articles a:listaArticulos) {
-				out.print("<div class='container'>\n"
-							+"<div class='class'>\n"
+				out.print(
+							"<div class=\"hijo\">"
 								
-								+"<p>Name:  "+a.getNombre()+"</p>"+"<br>"
+								+"<h3>Name:  "+a.getNombre()+"</h3>"+"<br>"
 								
 								+"<p>Description:  "+a.getDescripcion()+"</p>"+"<br>"
 								
@@ -124,14 +131,19 @@ public class loginExec extends HttpServlet {
 								+"<p>Categorie:  "+a.getCategoria().getNombre()+"</p>"+"<br>"
 								
 								+"<p>Quantity:  "+a.getQuantity()+"</p>"+"<br>"
-								
-								+"<input type='submit' value='Comprar'>"
-								
-							+"</div>\n"
-						+"</div>\n"
+								+"<form id=\"form\" method=\"post\" action=\"carritoExec\" border=\"3px\">"
+								+	"<input type='submit' value="+a.getNombre()+" hidden name='name'>"
+								+	"<input type='submit' value="+a.getDescripcion()+" hidden name='description'>"
+								+	"<input type='submit' value="+a.getPrecio()+" hidden name='price'>"
+								+	"<input type='submit' value="+a.getQuantity()+" hidden name='quantity'>"
+								+	"<input type='submit' value='Comprar'>"
+								+"</form>"
+								+"<br>"
+							+"</div>"
 						);
 				
 			}
+			out.println("</div>\n");
 			contador+=1;
 					
 					out.println("\n"
