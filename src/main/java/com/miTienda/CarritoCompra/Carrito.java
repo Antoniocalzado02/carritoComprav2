@@ -17,6 +17,10 @@ public class Carrito {
 		super();
 		this.listCarrito = listCarrito;
 	}
+	
+	public Carrito() {
+		super();
+	}
 
 	public List<itemCarrito> getListCarrito() {
 		return listCarrito;
@@ -63,6 +67,10 @@ public class Carrito {
 			listCarrito.remove(b);	
 		}
 		
+	}
+	
+	public int getCantidadTotal() {
+		return listCarrito.size();
 	}
 	
 	public void updateItemCarrito(itemCarrito c) {

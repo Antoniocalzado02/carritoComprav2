@@ -15,13 +15,17 @@ public class itemCarrito {
 	
 	
 	
-	public itemCarrito(String name_usuario, int id_article, int quantity, double price, Date fecha) {
+	public itemCarrito(String name_usuario, int id_article, int quantity, double price) {
 		super();
 		this.name_usuario = name_usuario;
 		this.id_article = id_article;
 		this.quantity = quantity;
 		this.price = price;
 		this.fecha = LocalDate.now();
+	}
+	
+	public itemCarrito() {
+		super();
 	}
 	
 	

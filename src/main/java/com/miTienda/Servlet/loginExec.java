@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.miTienda.Articles.Articles;
+import com.miTienda.CarritoCompra.Carrito;
 import com.miTienda.Categoria.Categoria;
 import com.miTienda.Crud.CrudArticles;
 import com.miTienda.Crud.CrudCategoria;
@@ -59,6 +60,8 @@ public class loginExec extends HttpServlet {
 				
 				HttpSession sesion=request.getSession();
 				
+				Carrito carritoCompra;
+				carritoCompra=(Carrito) sesion.getAttribute("carroCompra");
 				
 				Boolean error=false;
 				int msgError=0;
@@ -85,9 +88,14 @@ public class loginExec extends HttpServlet {
 						sesion.setAttribute("login", "True");
 						sesion.setAttribute("usuario", name);
 						sesion.setAttribute("password", password);
+						if(carritoCompra==null) {
+							carritoCompra=new Carrito();
+							sesion.setAttribute("carroCompra", carritoCompra);
+						}
 						
 					}
 				}
+				
 		
 		if (!error) {			
 			
@@ -109,11 +117,12 @@ public class loginExec extends HttpServlet {
 					+ "<img src=\"imagenes/logo.png\" class=\"logo\" width=\"50px\" align=\"center\">\n"
 					+ "<br>"
 					+ "<br>"
-					+ "<a href=cerrarSesion.jsp align=\"center\"><button class=\"btn\">Cerrar Sesion</button></a>"
-					+ "<img src=\"imagenes/carrito.png\" class=\"carrito\" width=\"50px\" align=\"right\">\n");
+					+ "<a href=cerrarSesion.jsp align=\"center\"><button class=\"btn\">Cerrar Sesion</button></a>");
 					if(u.isEs_admin()==true) {
 						response.getWriter().append("<a href=addArticulo.jsp align=\"center\"><button class=\"btn\">Add Articulo</button></a>");
 					}
+					out.println("<a href=carritoExec><img src=\"imagenes/carrito.png\" class=\"carrito\" width=\"50px\" align=\"center\"></a>\n"
+					+"<p>"+carritoCompra.getCantidadTotal()+"</p>");
 					out.println("</header>");
 			out.println(
 					"<table border='1' class=\"tabla\">\n"
@@ -132,10 +141,10 @@ public class loginExec extends HttpServlet {
 								
 								+"<p>Quantity:  "+a.getQuantity()+"</p>"+"<br>"
 								+"<form id=\"form\" method=\"post\" action=\"carritoExec\" border=\"3px\">"
-								+	"<input type='submit' value="+a.getNombre()+" hidden name='name'>"
-								+	"<input type='submit' value="+a.getDescripcion()+" hidden name='description'>"
-								+	"<input type='submit' value="+a.getPrecio()+" hidden name='price'>"
-								+	"<input type='submit' value="+a.getQuantity()+" hidden name='quantity'>"
+								+	"<input type='text' value="+u.getNickname()+" hidden name='nameUser'>"
+								+	"<input type='number' value="+a.getId()+" hidden name='id'>"
+								+	"<input type='number' name='quantity' value='1' min='1'>"
+								+	"<input type='number' value="+a.getPrecio()+" hidden name='price'>"
 								+	"<input type='submit' value='Comprar'>"
 								+"</form>"
 								+"<br>"
