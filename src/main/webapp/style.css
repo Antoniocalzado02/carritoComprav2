@@ -11,7 +11,7 @@
 .container{
 	background-color: aquamarine;
 	text-align: center;
-	padding: 13%;
+	padding: 15%;
 	table-layout: auto;
 	border-style: solid; color: black;
 }
@@ -22,6 +22,26 @@
 	padding: 15%;
 	table-layout: auto;
 	border-style: solid; color: black;
+}
+
+.compra{
+	background-color: white;
+	text-align: center;
+	padding: 15%;
+	table-layout: auto;
+	border-style: solid; color: black;
+	overflow: scroll;
+	width: 500px;
+	height: 100px;
+}
+
+.venta{
+	background-color: white;
+	text-align: center;
+	padding: 15%;
+	table-layout: auto;
+	border-style: solid; color: black;
+	width: 500px;
 }
 
 .padre{
@@ -36,3 +56,14 @@
 	table-layout: auto;
 	border-style: solid; color: black;
 }
+
+.inform{
+	background-color: aquamarine;
+	text-align: center;
+	padding: 10%;
+	table-layout: auto;
+	border-style: solid; color: black;
+}
+
+
+

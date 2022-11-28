@@ -113,7 +113,7 @@ public class loginExec extends HttpServlet {
 					+ "</head>\n"
 					+ "<body>\n"
 					+ "<header class=\"cabecera\">"
-					+ "<p align=\"center\">Bienvenido "+ name + "</p>"
+					+ "<p align=\"center\">Logueado: "+ name + "</p>"
 					+ "<img src=\"imagenes/logo.png\" class=\"logo\" width=\"50px\" align=\"center\">\n"
 					+ "<br>"
 					+ "<br>"
@@ -121,7 +121,7 @@ public class loginExec extends HttpServlet {
 					if(u.isEs_admin()==true) {
 						response.getWriter().append("<a href=addArticulo.jsp align=\"center\"><button class=\"btn\">Add Articulo</button></a>");
 					}
-					out.println("<a href=carritoExec><img src=\"imagenes/carrito.png\" class=\"carrito\" width=\"50px\" align=\"center\"></a>\n"
+					out.println("<a href=CarritoCompra.jsp><img src=\"imagenes/carrito.png\" class=\"carrito\" width=\"50px\" align=\"center\"></a>\n"
 					+"<p>"+carritoCompra.getCantidadTotal()+"</p>");
 					out.println("</header>");
 			out.println(
