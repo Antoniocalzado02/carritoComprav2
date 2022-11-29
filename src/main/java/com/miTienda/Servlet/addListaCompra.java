@@ -1,32 +1,36 @@
 package com.miTienda.Servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.catalina.ha.backend.Sender;
+import javax.servlet.http.HttpSession;
 
 import com.miTienda.Articles.Articles;
-import com.miTienda.Categoria.Categoria;
+import com.miTienda.CarritoCompra.Carrito;
+import com.miTienda.CarritoCompra.itemCarrito;
 import com.miTienda.Crud.CrudArticles;
-import com.miTienda.Crud.CrudCategoria;
+import com.miTienda.Crud.CrudCarrito;
+import com.miTienda.Crud.CrudUser;
+import com.miTienda.User.User;
+import com.miTienda.UsuarioArticles.UsuarioArticles;
 
 /**
- * Servlet implementation class addArticulo
+ * Servlet implementation class addListaCompra
  */
-@WebServlet("/addArticulo")
-public class addArticulo extends HttpServlet {
+@WebServlet("/addListaCompra")
+public class addListaCompra extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public addArticulo() {
+    public addListaCompra() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,7 +41,6 @@ public class addArticulo extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
 	}
 
 	/**
@@ -45,35 +48,25 @@ public class addArticulo extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String name=request.getParameter("name");
-		String description=request.getParameter("description");
-		Double price=Double.parseDouble(request.getParameter("price"));
-		int quantity=Integer.parseInt(request.getParameter("quantity"));
-		Categoria c=CrudCategoria.readCategoria(Integer.parseInt(request.getParameter("categorie")));
+		HttpSession sesion=request.getSession();
+		
+		//Obtengo el usuario de la sesison
+		User u=CrudUser.readUser((String)sesion.getAttribute("usuario"));
 		
 		
+		Carrito carritoCompra=(Carrito) sesion.getAttribute("carroCompra");
 		
-		
-		PrintWriter out=response.getWriter();
-		Boolean error=false;
-		int msgError=0;
-		
-		
-		if(name==null || name.isEmpty() || description==null || description.isEmpty() || price==null) {
-			error=true;
-			msgError=5;
-		}
-		
-		if(error) {
-			response.sendRedirect("error.jsp?msg="+msgError);
-		}
-		else {
-			Articles a= new Articles(name, description, price,quantity, c);
-			CrudArticles.addArticle(a);
+		for(itemCarrito a: carritoCompra.getListCarrito()) {
+			int b=a.getId_article();
+			Articles article=CrudArticles.readArticle(b);
 			
-			response.sendRedirect("loginExec");
+			UsuarioArticles c=new UsuarioArticles(article, u, a.getPrice(), a.getQuantity(), a.getFecha());
+			
+			CrudCarrito.addUsuarioArticle(c);
+			
 			
 		}
+		response.sendRedirect("annadidoCorrectamente.jsp");
 	}
 
 }

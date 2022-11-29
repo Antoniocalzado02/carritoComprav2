@@ -1,5 +1,6 @@
 package com.miTienda.UsuarioArticles;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -30,7 +31,7 @@ public class UsuarioArticles {
 	
 	@Id
 	@Column (name="date_buy")
-	private Date date_buy;
+	private LocalDate date_buy;
 	
 	@Column (name="price")
 	private Double price;
@@ -38,7 +39,7 @@ public class UsuarioArticles {
 	private int quantity;
 	
 	
-	public UsuarioArticles(Articles id_article, User name_usuario, Double price, int quantity, Date date_buy) {
+	public UsuarioArticles(Articles id_article, User name_usuario, Double price, int quantity, LocalDate date_buy) {
 		super();
 		this.id_article = id_article;
 		this.name_usuario = name_usuario;
@@ -73,13 +74,13 @@ public class UsuarioArticles {
 
 
 
-	public Date getDate_buy() {
+	public LocalDate getDate_buy() {
 		return date_buy;
 	}
 
 
 
-	public void setDate_buy(Date date_buy) {
+	public void setDate_buy(LocalDate date_buy) {
 		this.date_buy = date_buy;
 	}
 

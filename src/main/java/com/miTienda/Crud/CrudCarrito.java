@@ -2,6 +2,7 @@ package com.miTienda.Crud;
 
 import org.hibernate.Session;
 
+import com.miTienda.Articles.Articles;
 import com.miTienda.UsuarioArticles.UsuarioArticles;
 
 public class CrudCarrito {
@@ -9,7 +10,7 @@ public class CrudCarrito {
 		super();
 	}
 	
-	public static boolean addCarrito(UsuarioArticles s) {
+	public static boolean addUsuarioArticle(UsuarioArticles s) {
 		boolean resultado=false;
 		Session session = connection.getSession();
 		try {

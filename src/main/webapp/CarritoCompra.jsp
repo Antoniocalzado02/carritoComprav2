@@ -2,6 +2,8 @@
 <%@page import="com.miTienda.Crud.CrudArticles"%>
 <%@page import="com.miTienda.CarritoCompra.itemCarrito"%>
 <%@page import="com.miTienda.CarritoCompra.Carrito"%>
+<%@page import="com.miTienda.User.User" %>
+<%@page import="com.miTienda.Crud.CrudUser" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -19,17 +21,26 @@
 	</header>
 <%
 HttpSession sesion=request.getSession();
+
+//Obtengo el usuario de la seison
+User u=CrudUser.readUser((String)sesion.getAttribute("usuario"));
+
 Carrito carritoCompra;
 carritoCompra=(Carrito) sesion.getAttribute("carroCompra");
 
-
-
+if(carritoCompra!=null){
 %>
 	<div class="container">
 	<div class="compra" overflow: scroll>
 		<%for(itemCarrito i: carritoCompra.getListCarrito()){
-			%><div class="inform"><%=i.toString()%></div><br><% 
-		
+		%><%Articles a= CrudArticles.readArticle(i.getId_article());%>
+			<div class="inform"><%=i.toString()%>
+				<form method="post" action="updateQuantity">
+					Quantity: <input type="number" name="updateQuantity" id="updateQuantity" value="<%=i.getQuantity() %>" min="1" max="<%=a.getQuantity()%>">
+					<input type="text" value="<%=a.getId() %>" hidden name="idItem" id="idItem">
+					<button type="submit">Update quantity</button>
+				</form>
+			</div><br><% 
 		}%>
 	</div>
 	<br>
@@ -52,10 +63,17 @@ carritoCompra=(Carrito) sesion.getAttribute("carroCompra");
 			<%="-------------------------------------"%><br>
 			<br>
 			<%="Total a pagar: "+ contador+ " $" %>
+		</form>
+		<form method="post" action="addListaCompra">
 		<button type="submit">Comprar ya</button>
 		</form>
+		<button type="button"><a href="loginExec">Volver al menú</a></button>
 	</div>
 	</div>
-
+<%}else{ %>
+	
+<%
+response.sendRedirect("loginExec");
+}%>
 </body>
 </html>

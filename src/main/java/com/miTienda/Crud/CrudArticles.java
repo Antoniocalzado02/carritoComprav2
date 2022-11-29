@@ -22,11 +22,11 @@ public class CrudArticles {
 		super();
 	}
 	
-	public static Articles readUser(String username) {
+	public static Articles readArticle(int id) {
 		Session session = connection.getSession();
 		Articles u=null;
 		try {
-			u= (Articles) session.get(Articles.class,username);
+			u= (Articles) session.get(Articles.class,id);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
