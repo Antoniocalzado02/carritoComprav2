@@ -93,5 +93,20 @@ public class CrudArticles {
 		return list;
 		
 	}
+	
+	public static void updateArticleStock(int id, Integer stock) {
+        Session session = connection.getSession();
+        Articles p = (Articles) session.get(Articles.class, id);
+        System.out.println(p.getQuantity()-stock);
+        p.setQuantity(p.getQuantity()-stock);
+        System.out.println(p.getQuantity()-stock);
+        try {
+            session.getTransaction().begin();
+            session.save(p);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+        }
+    }
 
 }

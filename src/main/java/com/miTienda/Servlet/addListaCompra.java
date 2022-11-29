@@ -60,7 +60,7 @@ public class addListaCompra extends HttpServlet {
 			Articles article=CrudArticles.readArticle(a.getId_article());
 			
 			UsuarioArticles c=new UsuarioArticles(article, u, a.getPrice(), a.getQuantity(), a.getFecha());
-			
+			CrudArticles.updateArticleStock(article.getId(), a.getQuantity());
 			CrudCarrito.addUsuarioArticle(c);
 			
 			

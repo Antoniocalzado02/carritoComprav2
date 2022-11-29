@@ -141,11 +141,11 @@ public class loginExec extends HttpServlet {
 								
 								+"<p>Categorie:  "+a.getCategoria().getNombre()+"</p>"+"<br>"
 								
-								+"<p>Quantity:  "+a.getQuantity()+"</p>"+"<br>"
+								+"<p>Quantity:  "+(a.getQuantity())+"</p>"+"<br>"
 								+"<form id=\"form\" method=\"post\" action=\"carritoExec\" border=\"3px\">"
 								+	"<input type='text' value="+u.getNickname()+" hidden name='nameUser'>"
 								+	"<input type='number' value="+a.getId()+" hidden name='id'>"
-								+	"<input type='number' name='quantity' value='1' min='1'>"
+								+	"<input type='number' name='quantity' value='1' min='1' max="+a.getQuantity()+">"
 								+	"<input type='number' value="+a.getPrecio()+" hidden name='price'>"
 								+	"<input type='submit' value='Comprar'>"
 								+"</form>"

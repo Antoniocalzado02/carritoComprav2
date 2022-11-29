@@ -2,6 +2,7 @@ package com.miTienda.UsuarioArticles;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -9,7 +10,7 @@ public class Usuario_ArticlesJoin implements Serializable{
 	
 	private String name_usuario;
 	private int id_article;
-	private LocalDate date_buy;
+	private LocalDateTime date_buy;
 	
 
 	public Usuario_ArticlesJoin() {
@@ -47,14 +48,14 @@ public class Usuario_ArticlesJoin implements Serializable{
 
 
 
-	public LocalDate getDate_buy() {
+	public LocalDateTime getDate_buy() {
 		return date_buy;
 	}
 
 
 
 
-	public void setDate_buy(LocalDate date_buy) {
+	public void setDate_buy(LocalDateTime date_buy) {
 		this.date_buy = date_buy;
 	}
 

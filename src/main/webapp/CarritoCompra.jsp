@@ -1,3 +1,4 @@
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="com.miTienda.Articles.Articles"%>
 <%@page import="com.miTienda.Crud.CrudArticles"%>
 <%@page import="com.miTienda.CarritoCompra.itemCarrito"%>
@@ -34,7 +35,12 @@ if(carritoCompra!=null){
 	<div class="compra" overflow: scroll>
 		<%for(itemCarrito i: carritoCompra.getListCarrito()){
 		%><%Articles a= CrudArticles.readArticle(i.getId_article());%>
-			<div class="inform"><%=i.toString()%>
+			<div class="inform">
+				<p><%=i.getId_article() %></p>
+				<p><%=i.getName_usuario() %></p>
+				<p><%=i.getPrice() %></p>
+				<p><%=i.getQuantity() %></p>
+				<p><%=DateTimeFormatter.ISO_LOCAL_DATE.format(i.getFecha())+"   "+ DateTimeFormatter.ISO_LOCAL_TIME.format(i.getFecha().minusNanos(i.getFecha().getNano()))%></p>
 				<form method="post" action="updateQuantity">
 					Quantity: <input type="number" name="updateQuantity" id="updateQuantity" value="<%=i.getQuantity() %>" min="1" max="<%=a.getQuantity()%>">
 					<input type="text" value="<%=a.getId() %>" hidden name="idItem" id="idItem">
