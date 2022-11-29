@@ -47,6 +47,10 @@ public class UsuarioArticles {
 		this.quantity = quantity;
 		this.date_buy = date_buy;
 	}
+	
+	public UsuarioArticles() {
+		super();
+	}
 
 
 

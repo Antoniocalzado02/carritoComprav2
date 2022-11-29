@@ -29,6 +29,11 @@ public class Carrito {
 	public void setListCarrito(List<itemCarrito> listCarrito) {
 		this.listCarrito = listCarrito;
 	}
+	
+	public List<itemCarrito> vaciarLista() {
+		listCarrito.clear();
+		return listCarrito;
+	}
 
 	@Override
 	public int hashCode() {

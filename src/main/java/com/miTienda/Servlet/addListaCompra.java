@@ -57,8 +57,7 @@ public class addListaCompra extends HttpServlet {
 		Carrito carritoCompra=(Carrito) sesion.getAttribute("carroCompra");
 		
 		for(itemCarrito a: carritoCompra.getListCarrito()) {
-			int b=a.getId_article();
-			Articles article=CrudArticles.readArticle(b);
+			Articles article=CrudArticles.readArticle(a.getId_article());
 			
 			UsuarioArticles c=new UsuarioArticles(article, u, a.getPrice(), a.getQuantity(), a.getFecha());
 			
@@ -66,6 +65,7 @@ public class addListaCompra extends HttpServlet {
 			
 			
 		}
+		carritoCompra.vaciarLista();
 		response.sendRedirect("annadidoCorrectamente.jsp");
 	}
 

@@ -117,11 +117,13 @@ public class loginExec extends HttpServlet {
 					+ "<img src=\"imagenes/logo.png\" class=\"logo\" width=\"50px\" align=\"center\">\n"
 					+ "<br>"
 					+ "<br>"
+					+ "<a href=mostrarListado.jsp align=\"center\"><button class=\"btn\">Mostrar Listado</button></a>)"
 					+ "<a href=cerrarSesion.jsp align=\"center\"><button class=\"btn\">Cerrar Sesion</button></a>");
 					if(u.isEs_admin()==true) {
 						response.getWriter().append("<a href=addArticulo.jsp align=\"center\"><button class=\"btn\">Add Articulo</button></a>");
 					}
-					out.println("<a href=CarritoCompra.jsp><img src=\"imagenes/carrito.png\" class=\"carrito\" width=\"50px\" align=\"center\"></a>\n"
+					out.println("<br>"
+					+"<a href=CarritoCompra.jsp><img src=\"imagenes/carrito.png\" class=\"carrito\" width=\"50px\" align=\"center\"></a>\n"
 					+"<p>"+carritoCompra.getCantidadTotal()+"</p>");
 					out.println("</header>");
 			out.println(
