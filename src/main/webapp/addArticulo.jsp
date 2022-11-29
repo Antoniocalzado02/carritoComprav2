@@ -46,6 +46,8 @@ else{
 		<input type="submit" value="Enviar">
 	</form>
 
+<a href="loginExec"><button type="button">Pulsa para volver</button></a>
+
 </div>
 
 </body>

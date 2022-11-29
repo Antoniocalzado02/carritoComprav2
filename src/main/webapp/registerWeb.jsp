@@ -35,7 +35,7 @@
         </div><br>
         <div class="form-field">
             <label for="password">Contraseña</label>
-            <input type="password" id="password" name="password" required>
+            <input type="password" id="password" name="password" required minleght="6">
             <small></small>
         </div><br>
         <div class="form-field">
